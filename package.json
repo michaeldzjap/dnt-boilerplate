@@ -50,12 +50,12 @@
   "husky": {
     "hooks": {
       "pre-commit": "tsc --noEmit && lint-staged"
-    },
-    "lint-staged": {
-      "*.{js,ts}": [
-        "eslint --fix",
-        "git add"
-      ]
     }
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts}": [
+      "eslint . --fix",
+      "git add"
+    ]
   }
 }
