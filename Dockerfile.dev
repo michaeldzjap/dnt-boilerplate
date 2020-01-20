@@ -1,0 +1,6 @@
+FROM node:alpine
+
+# We need Git, otherwise Husky will throw an error on `npm install`
+RUN apk update && apk upgrade && apk add --no-cache git
+
+EXPOSE 3000
