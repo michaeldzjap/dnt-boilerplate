@@ -1,7 +1,7 @@
 module.exports = {
     preset: 'ts-jest',
     testEnvironment: 'node',
-    roots: ['<rootDir>/tests/feature', '<rootDir>/tests/unit'],
+    roots: ['<rootDir>/tests/feature/', '<rootDir>/tests/unit/'],
     modulePaths: ['<rootDir>/src/'],
     coverageThreshold: {
         global: {

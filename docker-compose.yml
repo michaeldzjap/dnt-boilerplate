@@ -18,18 +18,27 @@ services:
         << : *default-base
         command: npm run watch
         ports:
-            - 3000:3000
+            - 8080:8080
+        depends_on:
+            - mongo
         env_file:
             - .env.development
 
-    serve:
-        << : *default-base
-        command: npm run serve
-        ports:
-            - 3000:3000
+    mongo:
+        image: mongo:latest
+        restart: always
         env_file:
-            - .env
+            - .env.development
+
+    mongo-express:
+        image: mongo-express:latest
+        restart: always
+        ports:
+            - 8081:8081
+        depends_on:
+            - mongo
+        env_file:
+            - .env.development
 
 volumes:
     node-modules:
-        external: true
