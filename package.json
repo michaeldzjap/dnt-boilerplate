@@ -17,7 +17,7 @@
     "watch": "NODE_ENV=development ./node_modules/.bin/npm-run-all --parallel watch:ts watch:js",
     "watch:ts": "./node_modules/.bin/tsc --project ./tsconfig.dev.json --watch",
     "watch:js": "./node_modules/.bin/nodemon build/app.js",
-    "production": "NODE_ENV=production tsc --project ./tsconfig.prod.json",
+    "production": "NODE_ENV=production ./node_modules/.bin/tsc --project ./tsconfig.prod.json",
     "prod": "npm run production",
     "clean": "rm -rf ./dist",
     "serve": "NODE_ENV=production node ./dist/app.js"
