@@ -9,7 +9,7 @@
     "TypeScript"
   ],
   "scripts": {
-    "lint": "tsc --noEmit && eslint '*/**/*.{js,ts}' --quiet --fix",
+    "lint": "./node_modules/.bin/tsc --noEmit && ./node_modules/.bin/eslint '*/**/*.{js,ts}' --quiet --fix",
     "test": "NODE_ENV=test ./node_modules/.bin/jest",
     "test:watch": "npm test -- --watch",
     "development": "NODE_ENV=development ./node_modules/.bin/tsc --project ./tsconfig.dev.json",
@@ -17,7 +17,7 @@
     "watch": "NODE_ENV=development ./node_modules/.bin/npm-run-all --parallel watch:ts watch:js",
     "watch:ts": "./node_modules/.bin/tsc --project ./tsconfig.dev.json --watch",
     "watch:js": "./node_modules/.bin/nodemon build/app.js",
-    "production": "NODE_ENV=production ./node_modules/.bin/tsc --project ./tsconfig.prod.json",
+    "production": "NODE_ENV=production ./node_modules/.bin/tsc",
     "prod": "npm run production",
     "clean": "rm -rf ./dist",
     "serve": "NODE_ENV=production node ./dist/app.js"
