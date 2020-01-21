@@ -13,15 +13,31 @@
     },
     "plugins": [
         "@typescript-eslint",
+        "prettier",
         "jest"
     ],
     "extends": [
         "eslint:recommended",
+        "plugin:jest/recommended",
+        "plugin:eslint-comments/recommended",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
-        "prettier/@typescript-eslint",
-        "plugin:prettier/recommended",
-        "plugin:jest/recommended",
-        "plugin:eslint-comments/recommended"
-    ]
+        "prettier",
+        "prettier/@typescript-eslint"
+    ],
+    "rules": {
+        "prettier/prettier": "error",
+        "require-jsdoc": [
+            "error",
+            {
+                "require": {
+                    "FunctionDeclaration": true,
+                    "MethodDefinition": true,
+                    "ClassDeclaration": true,
+                    "ArrowFunctionExpression": true,
+                    "FunctionExpression": true
+                }
+            }
+        ]
+    }
 }
