@@ -1,3 +1,5 @@
+import { resolve } from 'path';
+
 /**
  * Determine if the given value is undefined.
  *
@@ -76,13 +78,25 @@ export const env = <T>(key: string, dflt?: T): T | boolean | string | number | n
 
     const { length } = value;
 
-    if (isNumeric(value) as boolean) {
+    if (isNumeric(value)) {
         return Number(value);
     }
 
-    if (length > 1 && value[0] === '"' && value[length - 1] === '"') {
-        return value.substring(1, length - 1);
+    if (
+        length > 1 &&
+        (value[0] === '"' || value[0] === "'") &&
+        (value[length - 1] === '"' || value[length - 1] === "'")
+    ) {
+        return (value as string).substring(1, length - 1);
     }
 
-    return value;
+    return value as string;
 };
+
+/**
+ * Get the path to the view directory
+ *
+ * @param {string} [path='']
+ * @returns {string}
+ */
+export const viewPath = (path = ''): string => resolve(__dirname, '../views', path);
