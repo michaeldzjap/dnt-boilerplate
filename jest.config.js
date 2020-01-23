@@ -12,4 +12,9 @@ module.exports = {
         },
     },
     collectCoverage: true,
+    globals: {
+        'ts-jest': {
+            tsConfig: 'tsconfig.test.json',
+        },
+    },
 };

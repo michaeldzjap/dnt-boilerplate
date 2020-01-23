@@ -1,3 +1,3 @@
 {
-    "watch": ["build/app.js"]
+  "watch": ["build/app.js"]
 }

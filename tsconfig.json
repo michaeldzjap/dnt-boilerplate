@@ -1,6 +1,6 @@
 {
-    "extends": "./tsconfig.base",
-    "compilerOptions": {
-        "outDir": "./dist"
-    }
+  "extends": "./tsconfig.base",
+  "compilerOptions": {
+    "outDir": "./dist"
+  }
 }
