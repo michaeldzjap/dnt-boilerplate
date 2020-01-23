@@ -27,6 +27,8 @@ services:
     mongo:
         image: mongo:latest
         restart: always
+        volumes:
+          - ./init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
         env_file:
             - .env.development
 
