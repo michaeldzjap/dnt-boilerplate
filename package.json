@@ -2,7 +2,7 @@
   "name": "dnt-boilerplate",
   "version": "1.0.0",
   "description": "Biolerplate for a Docker, Node and TypeScript based application",
-  "main": "dist/app.js",
+  "main": "dist/bootstrap/index.js",
   "keywords": [
     "Docker",
     "Node",
@@ -16,11 +16,11 @@
     "dev": "npm run development",
     "watch": "NODE_ENV=development npm run copy && ./node_modules/.bin/npm-run-all --parallel watch:ts watch:js",
     "watch:ts": "./node_modules/.bin/tsc --watch",
-    "watch:js": "./node_modules/.bin/nodemon build/app.js",
+    "watch:js": "./node_modules/.bin/nodemon dist/bootstrap/index.js",
     "production": "NODE_ENV=production ./node_modules/.bin/tsc",
     "prod": "npm run production",
     "clean": "rm -rf ./dist",
-    "serve": "NODE_ENV=production node ./dist/app.js",
+    "serve": "NODE_ENV=production node ./dist/bootstrap/index.js",
     "copy": "copyfiles -u 1 \"./src/views/**/*.njk\" dist"
   },
   "repository": {
