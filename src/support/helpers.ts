@@ -29,16 +29,6 @@ export const isNullOrUndefined = (value: unknown): value is null | undefined => 
 };
 
 /**
- * Determine if the given value is a string.
- *
- * @param {*} value
- * @returns {boolean}
- */
-export const isString = (value: unknown): value is string => {
-    return typeof value === 'string' || value instanceof String;
-};
-
-/**
  * Determine if the given value is a valid number.
  *
  * @param {*} value
