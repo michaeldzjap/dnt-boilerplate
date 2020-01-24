@@ -1,5 +1,4 @@
 import { env } from '../support/helpers';
-import { Env } from '../types/support';
 
 export default {
     /*
@@ -11,7 +10,7 @@ export default {
     |
     */
 
-    NAME: env<string>('APP_NAME', 'DNT Boilerplate'),
+    NAME: env('APP_NAME', 'DNT Boilerplate'),
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +21,7 @@ export default {
     |
     */
 
-    ENV: env<Env>('NODE_ENV', 'development'),
+    ENV: env('NODE_ENV', 'development'),
 
     /*
     |--------------------------------------------------------------------------
@@ -34,7 +33,7 @@ export default {
     |
     */
 
-    URL: env<string>('APP_URL', 'http://localhost'),
+    URL: env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -45,5 +44,5 @@ export default {
     |
     */
 
-    HTTP_PORT: env<number>('HTTP_PORT', 8080),
+    HTTP_PORT: env('HTTP_PORT', 8080),
 };

@@ -1,5 +1,7 @@
 import { resolve } from 'path';
 
+import { Env } from '../types/support';
+
 /**
  * Determine if the given value is undefined.
  *
@@ -46,14 +48,40 @@ export const isNumeric = (value: any): value is number | string => {
     return !(value instanceof Array) && value - parseFloat(value) + 1 >= 0;
 };
 
+export function env(key: string): Env;
+export function env(key: string, dflt: Env): Env;
+export function env(key: string, dflt?: Env): Env;
+export function env(key: string, dflt?: Env): undefined;
+
+export function env(key: string): string;
+export function env(key: string, dflt: string): string;
+export function env(key: string, dflt?: string): string;
+export function env(key: string, dflt?: string): undefined;
+
+export function env(key: string): number;
+export function env(key: string, dflt: number): number;
+export function env(key: string, dflt?: number): number;
+export function env(key: string, dflt?: number): undefined;
+
+export function env(key: string): boolean;
+export function env(key: string, dflt: boolean): boolean;
+export function env(key: string, dflt?: boolean): boolean;
+export function env(key: string, dflt?: boolean): undefined;
+
+export function env(key: string): undefined;
+export function env(key: string): null;
+
 /**
  * Get the value of an environment variable.
  *
  * @param {string} key
- * @param {*} dflt
- * @returns {*}
+ * @param {(Env|string|number|boolean|undefined)} dflt
+ * @returns {?(Env|string|number|boolean|undefined)}
  */
-export const env = <T>(key: string, dflt?: T): T | boolean | string | number | null | undefined => {
+export function env(
+    key: string,
+    dflt?: Env | string | number | boolean,
+): Env | string | number | boolean | undefined | null {
     const value = process.env[key];
 
     if (isUndefined(value)) {
@@ -78,7 +106,7 @@ export const env = <T>(key: string, dflt?: T): T | boolean | string | number | n
 
     const { length } = value;
 
-    if (isNumeric(value)) {
+    if (isNumeric(value) as boolean) {
         return Number(value);
     }
 
@@ -87,11 +115,11 @@ export const env = <T>(key: string, dflt?: T): T | boolean | string | number | n
         (value[0] === '"' || value[0] === "'") &&
         (value[length - 1] === '"' || value[length - 1] === "'")
     ) {
-        return (value as string).substring(1, length - 1);
+        return value.substring(1, length - 1);
     }
 
-    return value as string;
-};
+    return value;
+}
 
 /**
  * Get the path to the view directory
