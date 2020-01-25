@@ -2,8 +2,8 @@ import { Server } from 'http';
 import express, { Request, Response } from 'express';
 
 import TemplatingManager from '../support/templating/TemplatingManager';
-import { NAME, HTTP_PORT } from '../config/app';
-import { HTTP_OK, HTTP_NOT_FOUND, HTTP_INTERNAL_SERVER_ERROR } from '../constants/http';
+import { HTTP_PORT } from '../config/app';
+import { HTTP_NOT_FOUND, HTTP_INTERNAL_SERVER_ERROR } from '../constants/http';
 
 /**
  * Bootstrap the application.
@@ -27,8 +27,7 @@ export const bootstrap = (): Server => {
     templating.driver().configure();
 
     app.get('/', (request: Request, response: Response): void => {
-        response.status(HTTP_OK);
-        response.render('welcome', { title: NAME });
+        response.render('welcome');
     });
 
     app.use((request: Request, response: Response): void => {
@@ -37,7 +36,7 @@ export const bootstrap = (): Server => {
         response.send('Not Found');
     });
 
-    app.use((error: Error, request: Request, response: Response): void => {
+    app.use((error: Error, request: Request, response: Response, next: Function): void => {
         console.error(error.stack);
 
         response.type('text/plain');

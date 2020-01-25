@@ -1,3 +1,10 @@
 {
-  "watch": ["dist/"]
+  "watch": [
+    "./dist",
+    "./src/views"
+  ],
+  "ext": "njk,js",
+  "events": {
+    "restart": "cp -r ./src/views ./dist"
+  }
 }
