@@ -1,4 +1,4 @@
-interface Templating {
+interface TemplatingEngine {
     /**
      * Configure the templating engine.
      *
@@ -7,4 +7,4 @@ interface Templating {
     configure(): void;
 }
 
-export default Templating;
+export default TemplatingEngine;

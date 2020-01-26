@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 
-import { isUndefined, isNull, isNullOrUndefined, isNumeric, env, viewPath } from '../../../src/support/helpers';
+import { isUndefined, isNull, isNullOrUndefined, isNumeric, env, viewPath } from '../../../src/lib/support/helpers';
 
 describe('helpers:isUndefined', (): void => {
     it('confirms a given value is undefined', (): void => {

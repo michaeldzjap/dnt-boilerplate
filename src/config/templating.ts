@@ -1,5 +1,4 @@
-import { env } from '../support/helpers';
-import { options } from '../types/support/templating';
+import { env } from '../lib/support/helpers';
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +12,7 @@ import { options } from '../types/support/templating';
 |
 */
 
-export const DEFAULT = env('TEMPLATING_ENGINE', 'nunjucks') as options;
+export const DEFAULT = env('TEMPLATING_ENGINE', 'nunjucks');
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +28,7 @@ export const DEFAULT = env('TEMPLATING_ENGINE', 'nunjucks') as options;
 
 export const ENGINES = {
     NUNJUCKS: {
-        DRIVER: 'nunjucks' as options,
+        DRIVER: 'nunjucks',
         EXTENSION: 'njk',
     },
 };

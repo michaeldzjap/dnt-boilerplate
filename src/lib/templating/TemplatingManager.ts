@@ -1,16 +1,16 @@
 import { Application } from 'express';
 
-import DriverCreators from '../../types/support/DriverCreators';
-import Manager from '../Manager';
+import DriverCreators from '../../types/lib/support/DriverCreators';
+import Manager from '../support/Manager';
 import NunjucksDriver from './NunjucksDriver';
-import Templating from '../../types/support/templating/Templating';
+import TemplatingEngine from '../../types/lib/templating/TemplatingEngine';
 import { DEFAULT } from '../../config/templating';
 
 /**
  * @class
  * @classdesc Support class for managing the different templating driver options.
  */
-class TemplatingManager extends Manager<Templating> {
+class TemplatingManager extends Manager<TemplatingEngine> {
     /**
      * Create a new templating manager instance.
      *
@@ -37,7 +37,7 @@ class TemplatingManager extends Manager<Templating> {
      *
      * @returns {NunjucksDriver}
      */
-    private createNunjucksDriver(): Templating {
+    private createNunjucksDriver(): TemplatingEngine {
         return new NunjucksDriver(this.application);
     }
 }

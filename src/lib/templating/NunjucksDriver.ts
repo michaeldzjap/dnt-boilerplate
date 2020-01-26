@@ -2,9 +2,9 @@ import { Application } from 'express';
 import consolidate from 'consolidate';
 import nunjucks from 'nunjucks';
 
-import Engine from '../../types/support/templating/Engine';
-import Templating from '../../types/support/templating/Templating';
-import { viewPath } from '../helpers';
+import Config from '../../types/lib/config/templating/Engine';
+import TemplatingEngine from '../../types/lib/templating/TemplatingEngine';
+import { viewPath } from '../support/helpers';
 import { NAME } from '../../config/app';
 import { ENGINES } from '../../config/templating';
 
@@ -12,7 +12,7 @@ import { ENGINES } from '../../config/templating';
  * @class
  * @classdesc A Nunjuck specific templating engine driver.
  */
-class NunjucksDriver implements Templating {
+class NunjucksDriver implements TemplatingEngine {
     /**
      * The application instance.
      *
@@ -20,7 +20,12 @@ class NunjucksDriver implements Templating {
      */
     protected application: Application;
 
-    protected config: Engine;
+    /**
+     * The Nunjucks specific templating eninge config.
+     *
+     * @var {Config}
+     */
+    protected config: Config;
 
     /**
      * Create a new Nunjucks driver instance.
@@ -30,7 +35,7 @@ class NunjucksDriver implements Templating {
      */
     public constructor(application: Application) {
         this.application = application;
-        this.config = ENGINES.NUNJUCKS;
+        this.config = ENGINES.NUNJUCKS as Config;
     }
 
     /**

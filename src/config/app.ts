@@ -1,4 +1,4 @@
-import { env } from '../support/helpers';
+import { env } from '../lib/support/helpers';
 
 /*
 |--------------------------------------------------------------------------
@@ -24,22 +24,21 @@ export const ENV = env('NODE_ENV', 'development');
 
 /*
 |--------------------------------------------------------------------------
-| Application URL
+| Application HTTP Hostname
 |--------------------------------------------------------------------------
 |
-| This URL is used by the application whenever it needs a reference to the
-| app URL and no request is available.
+| The HTTP hostname the application will be listening on.
 |
 */
 
-export const URL = env('APP_URL', 'http://localhost');
+export const HTTP_HOSTNAME = env('HTTP_HOSTNAME', '127.0.0.1');
 
 /*
 |--------------------------------------------------------------------------
 | Application HTTP Port
 |--------------------------------------------------------------------------
 |
-| The HTTP port the application will be running on.
+| The HTTP port the application will be listening on.
 |
 */
 

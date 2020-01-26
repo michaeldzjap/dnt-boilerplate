@@ -1,7 +1,6 @@
 import { Application } from 'express';
 
-import Config from '../types/support/Config';
-import DriverCreators from '../types/support/DriverCreators';
+import DriverCreators from '../../types/lib/support/DriverCreators';
 import { isUndefined } from './helpers';
 
 /**

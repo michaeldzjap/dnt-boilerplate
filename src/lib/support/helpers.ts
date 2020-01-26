@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 
-import { Env } from '../types/support';
+import { Env } from '../../types/lib/support';
 
 /**
  * Determine if the given value is undefined.
@@ -117,4 +117,4 @@ export function env(
  * @param {string} [path='']
  * @returns {string}
  */
-export const viewPath = (path = ''): string => resolve(__dirname, '../views', path);
+export const viewPath = (path = ''): string => resolve(__dirname, '../../views', path);

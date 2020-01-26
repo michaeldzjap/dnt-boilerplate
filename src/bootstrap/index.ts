@@ -1,3 +1,5 @@
-import { bootstrap } from './app';
+import Application from './Application';
 
-bootstrap();
+const application = new Application();
+
+application.boot();
