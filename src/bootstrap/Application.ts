@@ -4,6 +4,7 @@ import express, { Express, Request, Response } from 'express';
 import ApplicationContract from '../types/lib/Application';
 import DatabaseManager from '../lib/database/DatabaseManager';
 import TemplatingManager from '../lib/templating/TemplatingManager';
+import web from '../routes/web';
 import { isUndefined } from '../lib/support/helpers';
 import { HTTP_HOSTNAME, HTTP_PORT } from '../config/app';
 import { HTTP_NOT_FOUND, HTTP_INTERNAL_SERVER_ERROR } from '../constants/http';
@@ -81,11 +82,16 @@ class Application implements ApplicationContract {
 
         await this.database.driver().connect();
 
-        // NOTE: temporarily define routes here, will be moved to a serve soon
+        /*
+        |------------------------------------------------------------------------------
+        | Routes
+        |------------------------------------------------------------------------------
+        |
+        | Register all routes with the application.
+        |
+        */
 
-        this.application.get('/', (request: Request, response: Response): void => {
-            response.render('welcome');
-        });
+        web(this.application);
 
         this.application.use((request: Request, response: Response): void => {
             response.type('text/plain');
@@ -101,7 +107,16 @@ class Application implements ApplicationContract {
             response.send('Internal Server Error');
         });
 
-        this.server = this.application.listen(HTTP_PORT, HTTP_HOSTNAME, (): void =>
+        /*
+        |------------------------------------------------------------------------------
+        | Server
+        |------------------------------------------------------------------------------
+        |
+        | Lastly, we can start the server.
+        |
+        */
+
+        this.server = this.application.listen(HTTP_PORT, (): void =>
             console.log(`Server running at http://${HTTP_HOSTNAME}:${HTTP_PORT}/`),
         );
     }
