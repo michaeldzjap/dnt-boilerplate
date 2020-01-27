@@ -112,6 +112,14 @@ export function env(
 }
 
 /**
+ * Determine if the app is running in the given environment.
+ *
+ * @param {Env} env
+ * @returns {boolean}
+ */
+export const environment = (env: Env): boolean => env === process.env.NODE_ENV;
+
+/**
  * Get the path to the view directory
  *
  * @param {string} [path='']

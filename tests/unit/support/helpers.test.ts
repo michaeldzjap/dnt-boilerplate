@@ -1,6 +1,14 @@
 import { resolve } from 'path';
 
-import { isUndefined, isNull, isNullOrUndefined, isNumeric, env, viewPath } from '../../../src/lib/support/helpers';
+import {
+    isUndefined,
+    isNull,
+    isNullOrUndefined,
+    isNumeric,
+    env,
+    environment,
+    viewPath,
+} from '../../../src/lib/support/helpers';
 
 describe('helpers:isUndefined', (): void => {
     it('confirms a given value is undefined', (): void => {
@@ -111,6 +119,12 @@ describe('helpers:env', (): void => {
     it('parses a numeric value correctly', (): void => {
         process.env.foo = '0';
         expect(env('foo')).toBe(0);
+    });
+});
+
+describe('helpers:environment', (): void => {
+    it('returns the correct environment', (): void => {
+        expect(environment('test')).toBeTruthy();
     });
 });
 

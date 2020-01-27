@@ -1,11 +1,12 @@
 import { Server } from 'http';
 import express, { Express, Request, Response } from 'express';
+import morgan from 'morgan';
 
 import ApplicationContract from '../types/lib/Application';
 import DatabaseManager from '../lib/database/DatabaseManager';
 import TemplatingManager from '../lib/templating/TemplatingManager';
 import web from '../routes/web';
-import { isUndefined } from '../lib/support/helpers';
+import { isUndefined, environment } from '../lib/support/helpers';
 import { HTTP_HOSTNAME, HTTP_PORT } from '../config/app';
 import { HTTP_NOT_FOUND, HTTP_INTERNAL_SERVER_ERROR } from '../constants/http';
 
@@ -81,6 +82,19 @@ class Application implements ApplicationContract {
         */
 
         await this.database.driver().connect();
+
+        /*
+        |------------------------------------------------------------------------------
+        | Logging
+        |------------------------------------------------------------------------------
+        |
+        | Enable request logging when in development mode.
+        |
+        */
+
+        if (environment('development')) {
+            this.application.use(morgan('dev'));
+        }
 
         /*
         |------------------------------------------------------------------------------
