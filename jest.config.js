@@ -3,6 +3,7 @@ module.exports = {
     testEnvironment: 'node',
     roots: ['<rootDir>/tests/feature/', '<rootDir>/tests/unit/'],
     modulePaths: ['<rootDir>/src/'],
+    testPathIgnorePatterns: ['<rootDir>/dist/', '<rootDir>/node_modules/', '<rootDir>/tests/stubs/'],
     coverageThreshold: {
         global: {
             branches: 80,

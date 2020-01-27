@@ -112,14 +112,14 @@ abstract class Manager<T> {
      * Create a new driver insance.
      *
      * @param {string} driver
-     * @returns {Queue}
+     * @returns {*}
      */
     protected createDriver(driver: string): T {
-        const creators = this.getDriverCreators();
-
         if (this.customCreators.has(driver)) {
             return this.callCustomCreator(driver);
         }
+
+        const creators = this.getDriverCreators();
 
         if (Object.prototype.hasOwnProperty.call(creators, driver)) {
             return creators[driver]();
