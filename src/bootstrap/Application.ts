@@ -2,6 +2,7 @@ import { Server } from 'http';
 import express, { Express, Request, Response } from 'express';
 import morgan from 'morgan';
 
+import api from '../routes/api';
 import ApplicationContract from '../types/lib/Application';
 import DatabaseManager from '../lib/database/DatabaseManager';
 import TemplatingManager from '../lib/templating/TemplatingManager';
@@ -101,11 +102,20 @@ class Application implements ApplicationContract {
         | Routes
         |------------------------------------------------------------------------------
         |
-        | Register all routes with the application.
+        | Register all routers and routes with the application.
         |
         */
 
-        web(this.application);
+        [
+            { prefix: '/', routes: web },
+            { prefix: '/api', routes: api },
+        ].forEach(({ prefix, routes }): void => {
+            const router = express.Router();
+
+            routes(router);
+
+            this.application.use(prefix, router);
+        });
 
         this.application.use((request: Request, response: Response): void => {
             response.type('text/plain');

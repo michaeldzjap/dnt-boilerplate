@@ -1,7 +1,7 @@
-import { Application } from 'express';
+import { Router } from 'express';
 
 import { index } from '../controllers/welcome';
 
-export default (application: Application): void => {
-    application.get('/', index);
+export default (router: Router): void => {
+    router.get('/', index);
 };

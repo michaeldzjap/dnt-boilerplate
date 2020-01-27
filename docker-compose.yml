@@ -1,46 +1,46 @@
 version: '3.7'
 x-base:
-    &default-base
-    build:
-        context: .
-        dockerfile: Dockerfile.dev
-    volumes:
-        - node-modules:/home/node/app/node_modules
-        - .:/home/node/app
-    working_dir: /home/node/app
+  &default-base
+  build:
+    context: .
+    dockerfile: Dockerfile.dev
+  volumes:
+    - node-modules:/home/node/app/node_modules
+    - .:/home/node/app
+  working_dir: /home/node/app
 
 services:
-    install:
-        << : *default-base
-        command: npm install
+  install:
+    << : *default-base
+    command: npm install
 
-    watch:
-        << : *default-base
-        command: npm run watch
-        ports:
-            - 8080:8080
-        depends_on:
-            - mongo
-        env_file:
-            - .env.development
+  watch:
+    << : *default-base
+    command: npm run watch
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongo
+    env_file:
+      - .env.development
 
-    mongo:
-        image: mongo:latest
-        restart: always
-        volumes:
-          - ./init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
-        env_file:
-            - .env.development
+  mongo:
+    image: mongo:latest
+    restart: always
+    volumes:
+      - ./init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+    env_file:
+      - .env.development
 
-    mongo-express:
-        image: mongo-express:latest
-        restart: always
-        ports:
-            - 8081:8081
-        depends_on:
-            - mongo
-        env_file:
-            - .env.development
+  mongo-express:
+    image: mongo-express:latest
+    restart: always
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongo
+    env_file:
+      - .env.development
 
 volumes:
-    node-modules:
+  node-modules:
