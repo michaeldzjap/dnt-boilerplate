@@ -32,7 +32,10 @@ class MongooseDriver implements Client {
      */
     async connect(): Promise<void> {
         try {
-            await mongoose.connect(this.url(), { useNewUrlParser: true });
+            await mongoose.connect(this.url(), {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+            });
 
             this.handleError();
         } catch (error) {
