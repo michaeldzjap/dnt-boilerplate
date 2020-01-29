@@ -16,13 +16,6 @@ abstract class Manager<T> {
     protected application: Application;
 
     /**
-     * The driver config
-     *
-     * @var {string}
-     */
-    protected default: string;
-
-    /**
      * The registered custom driver creators.
      *
      * @var {Map<string,Function>}
@@ -43,9 +36,8 @@ abstract class Manager<T> {
      * @param {Application} application
      * @param {string} dflt
      */
-    public constructor(application: Application, dflt: string) {
+    public constructor(application: Application) {
         this.application = application;
-        this.default = dflt;
     }
 
     /**
@@ -53,9 +45,7 @@ abstract class Manager<T> {
      *
      * @returns {string}
      */
-    public getDefaultDriver(): string {
-        return this.default;
-    }
+    public abstract getDefaultDriver(): string;
 
     /**
      * Get the given driver instance.
@@ -113,6 +103,8 @@ abstract class Manager<T> {
      *
      * @param {string} driver
      * @returns {*}
+     *
+     * @throws {Error}
      */
     protected createDriver(driver: string): T {
         if (this.customCreators.has(driver)) {

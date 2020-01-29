@@ -4,6 +4,7 @@ import Client from '../../types/lib/database/Client';
 import DriverCreators from '../../types/lib/support/DriverCreators';
 import Manager from '../support/Manager';
 import MongoDriver from './MongoDriver';
+import { Drivers } from '../../types/lib/config/database';
 import { DEFAULT } from '../../config/database';
 
 /**
@@ -18,7 +19,16 @@ class DatabaseManager extends Manager<Client> {
      * @param {Application} application
      */
     public constructor(application: Application) {
-        super(application, DEFAULT);
+        super(application);
+    }
+
+    /**
+     * Get the default driver name.
+     *
+     * @returns {Drivers}
+     */
+    public getDefaultDriver(): Drivers {
+        return DEFAULT;
     }
 
     /**

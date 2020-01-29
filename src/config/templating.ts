@@ -1,3 +1,5 @@
+import Config from '../types/lib/config/templating/Engine';
+import { Drivers } from '../types/lib/config/templating';
 import { env } from '../lib/support/helpers';
 
 /*
@@ -12,11 +14,11 @@ import { env } from '../lib/support/helpers';
 |
 */
 
-export const DEFAULT = env('TEMPLATING_ENGINE', 'nunjucks');
+export const DEFAULT = env('TEMPLATING_ENGINE', 'nunjucks') as Drivers;
 
 /*
 |--------------------------------------------------------------------------
-| Exchange Drivers
+| Engine Drivers
 |--------------------------------------------------------------------------
 |
 | Here you may configure the information for each possible exchange driver
@@ -26,9 +28,7 @@ export const DEFAULT = env('TEMPLATING_ENGINE', 'nunjucks');
 |
 */
 
-export const ENGINES = {
-    NUNJUCKS: {
-        DRIVER: 'nunjucks',
-        EXTENSION: 'njk',
-    },
+export const NUNJUCKS: Config = {
+    DRIVER: 'nunjucks',
+    EXTENSION: 'njk',
 };

@@ -2,7 +2,7 @@
 const merge = require('webpack-merge');
 const TerserPlugin = require('terser-webpack-plugin');
 
-const common = require('./webpack.common.js');
+const common = require('./webpack.server.common.js');
 
 module.exports = merge(common, {
     mode: 'production',

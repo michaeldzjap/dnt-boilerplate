@@ -25,7 +25,16 @@ export class DummyManager extends Manager<Dummy> {
      * @param {Application} application
      */
     public constructor(application: Application) {
-        super(application, DEFAULT);
+        super(application);
+    }
+
+    /**
+     * Get the default driver name.
+     *
+     * @returns {Dummy}
+     */
+    public getDefaultDriver(): Dummy {
+        return DEFAULT;
     }
 
     /**

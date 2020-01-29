@@ -6,7 +6,7 @@ import Config from '../../types/lib/config/templating/Engine';
 import TemplatingEngine from '../../types/lib/templating/TemplatingEngine';
 import { viewPath } from '../support/helpers';
 import { NAME } from '../../config/app';
-import { ENGINES } from '../../config/templating';
+import { NUNJUCKS } from '../../config/templating';
 
 /**
  * @class
@@ -35,7 +35,7 @@ class NunjucksDriver implements TemplatingEngine {
      */
     public constructor(application: Application) {
         this.application = application;
-        this.config = ENGINES.NUNJUCKS as Config;
+        this.config = NUNJUCKS;
     }
 
     /**

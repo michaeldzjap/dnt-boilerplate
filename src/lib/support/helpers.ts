@@ -125,4 +125,4 @@ export const environment = (env: Env): boolean => env === process.env.NODE_ENV;
  * @param {string} [path='']
  * @returns {string}
  */
-export const viewPath = (path = ''): string => resolve(__dirname, '../../views', path);
+export const viewPath = (path = ''): string => resolve(__dirname, '../../assets/views', path);

@@ -1,0 +1,37 @@
+{% extends 'layouts/main.njk' %}
+
+{% block title %}
+{{ 'Register' | title }}
+{% endblock %}
+
+{% block body %}
+<section class="section">
+    <div class="container">
+        <div class="columns is-mobile">
+            <div class="column is-full-mobile is-three-fifths-tablet is-offset-one-fifth-tablet is-half-desktop is-offset-one-quarter-desktop is-one-third-widescreen is-offset-one-third-widescreen">
+                <form action="/register" method="POST">
+                    <div class="field">
+                        <label class="label">Name</label>
+                        <div class="control">
+                            <input class="input" name="name" type="text">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Email</label>
+                        <div class="control">
+                            <input class="input" name="email" type="email">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-primary" type="submit">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

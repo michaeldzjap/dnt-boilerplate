@@ -16,7 +16,7 @@ services:
 
   watch:
     << : *default-base
-    command: npm run watch
+    command: npm run watch:server
     ports:
       - 8080:8080
     depends_on:

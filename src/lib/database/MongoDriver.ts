@@ -3,7 +3,7 @@ import Config from '../../types/lib/config/database/mongo/MongoConnection';
 import DriverCreators from '../../types/lib/support/DriverCreators';
 import MongooseDriver from './mongo/MongooseDriver';
 import { MongoDrivers } from '../../types/lib/config/database/mongo';
-import { CONNECTIONS } from '../../config/database';
+import { MONGO } from '../../config/database';
 
 /**
  * @class
@@ -30,7 +30,7 @@ class MongoDriver implements Client {
      * @constructor
      */
     public constructor() {
-        this.config = CONNECTIONS.MONGO as Config;
+        this.config = MONGO;
         this.driver = this.createDriver(this.config.OPTIONS.DRIVER);
     }
 

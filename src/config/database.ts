@@ -1,3 +1,5 @@
+import Config from '../types/lib/config/database/mongo/MongoConnection';
+import { Drivers } from '../types/lib/config/database';
 import { env } from '../lib/support/helpers';
 
 /*
@@ -10,7 +12,7 @@ import { env } from '../lib/support/helpers';
 |
 */
 
-export const DEFAULT = env('DATABASE_CONNECTION', 'mongo');
+export const DEFAULT = env('DATABASE_CONNECTION', 'mongo') as Drivers;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,16 +23,14 @@ export const DEFAULT = env('DATABASE_CONNECTION', 'mongo');
 |
 */
 
-export const CONNECTIONS = {
-    MONGO: {
-        DRIVER: 'mongo',
-        HOST: env('MONGODB_HOST', 'localhost'),
-        PORT: env('MONGODB_PORT', 27017),
-        DATABASE: env('MONGO_INITDB_DATABASE', 'dnt'),
-        USERNAME: env('MONGO_INITDB_USERNAME', 'dnt'),
-        PASSWORD: env('MONGO_INITDB_PASSWORD', 'secret'),
-        OPTIONS: {
-            DRIVER: 'mongoose',
-        },
+export const MONGO: Config = {
+    DRIVER: 'mongo',
+    HOST: env('MONGODB_HOST', 'localhost'),
+    PORT: env('MONGODB_PORT', 27017),
+    DATABASE: env('MONGO_INITDB_DATABASE', 'dnt'),
+    USERNAME: env('MONGO_INITDB_USERNAME', 'dnt'),
+    PASSWORD: env('MONGO_INITDB_PASSWORD', 'secret'),
+    OPTIONS: {
+        DRIVER: 'mongoose',
     },
 };

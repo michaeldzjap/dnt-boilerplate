@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 import Client from '../../../types/lib/database/Client';
 import Config from '../../../types/lib/config/database/mongo/MongoConnection';
-import { CONNECTIONS } from '../../../config/database';
+import { MONGO } from '../../../config/database';
 
 /**
  * @class
@@ -10,7 +10,7 @@ import { CONNECTIONS } from '../../../config/database';
  */
 class MongooseDriver implements Client {
     /**
-     * The MongoDB specific database connection config.
+     * The Mongoose config.
      *
      * @var {Config}
      */
@@ -22,7 +22,7 @@ class MongooseDriver implements Client {
      * @constructor
      */
     public constructor() {
-        this.config = CONNECTIONS.MONGO as Config;
+        this.config = MONGO;
     }
 
     /**

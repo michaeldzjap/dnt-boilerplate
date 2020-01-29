@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const path = require('path');
+const { resolve } = require('path');
 const nodeExternals = require('webpack-node-externals');
 const CopyPlugin = require('copy-webpack-plugin');
 
@@ -9,7 +9,7 @@ module.exports = {
     },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'dist'),
+        path: resolve(__dirname, 'dist'),
     },
     node: {
         __dirname: true,
@@ -20,12 +20,12 @@ module.exports = {
         rules: [
             {
                 test: /\.ts/,
-                exclude: path.resolve(__dirname, 'node_modules'),
+                exclude: resolve(__dirname, 'node_modules'),
                 loader: 'ts-loader',
             },
         ],
     },
-    plugins: [new CopyPlugin([{ from: './src/views', to: './views' }])],
+    plugins: [new CopyPlugin([{ from: './src/assets/views', to: './views' }])],
     resolve: {
         extensions: ['.ts', '.js'],
     },

@@ -130,7 +130,7 @@ describe('helpers:environment', (): void => {
 
 describe('helpers:viewPath', (): void => {
     it('returns the correct view path', (): void => {
-        expect(viewPath()).toBe(resolve(__dirname, '../../../src/views'));
-        expect(viewPath('layouts')).toBe(resolve(__dirname, '../../../src/views/layouts'));
+        expect(viewPath()).toBe(resolve(__dirname, '../../../src/assets/views'));
+        expect(viewPath('layouts')).toBe(resolve(__dirname, '../../../src/assets/views/layouts'));
     });
 });

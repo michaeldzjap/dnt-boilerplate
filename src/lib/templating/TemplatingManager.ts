@@ -4,6 +4,7 @@ import DriverCreators from '../../types/lib/support/DriverCreators';
 import Manager from '../support/Manager';
 import NunjucksDriver from './NunjucksDriver';
 import TemplatingEngine from '../../types/lib/templating/TemplatingEngine';
+import { Drivers } from '../../types/lib/config/templating';
 import { DEFAULT } from '../../config/templating';
 
 /**
@@ -18,7 +19,16 @@ class TemplatingManager extends Manager<TemplatingEngine> {
      * @param {Application} application
      */
     public constructor(application: Application) {
-        super(application, DEFAULT);
+        super(application);
+    }
+
+    /**
+     * Get the default driver name.
+     *
+     * @returns {Drivers}
+     */
+    public getDefaultDriver(): Drivers {
+        return DEFAULT;
     }
 
     /**
