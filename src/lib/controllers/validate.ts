@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 
+import { expectsJson } from '../http/helpers';
 import { HTTP_UNPROCESSABLE_ENTITY } from '../../constants/http';
 
 /**
@@ -11,12 +12,13 @@ import { HTTP_UNPROCESSABLE_ENTITY } from '../../constants/http';
  * @param {string} view
  * @returns {void}
  */
-export const html = (request: Request, response: Response, view: string): void => {
+const html = (request: Request, response: Response): void => {
     const errors = validationResult(request);
 
     if (!errors.isEmpty()) {
         response.status(HTTP_UNPROCESSABLE_ENTITY);
-        response.render(view, { errors: errors.array() });
+        // response.redirect(request.path);
+        // response.render(view, { errors: errors.array() });
     }
 };
 
@@ -27,11 +29,27 @@ export const html = (request: Request, response: Response, view: string): void =
  * @param {Response} response
  * @returns {void}
  */
-export const json = (request: Request, response: Response): void => {
+const json = (request: Request, response: Response): void => {
     const errors = validationResult(request);
 
     if (!errors.isEmpty()) {
         response.status(HTTP_UNPROCESSABLE_ENTITY);
         response.json({ errors: errors.array() });
+    }
+};
+
+/**
+ * Check if there are any validation errors and return the appropriate error
+ * response if there are any.
+ *
+ * @param {Request} request
+ * @param {Response} response
+ * @returns {void}
+ */
+export const validate = (request: Request, response: Response): void => {
+    if (expectsJson(request)) {
+        json(request, response);
+    } else {
+        html(request, response);
     }
 };

@@ -1,34 +1,17 @@
 import mongoose from 'mongoose';
 
 import Client from '../../../types/lib/database/Client';
-import Config from '../../../types/lib/config/database/mongo/MongoConnection';
-import { MONGO } from '../../../config/database';
+import MongoClient from './MongoClient';
 
 /**
  * @class
  * @classdesc A Mongoose specific database connection driver.
  */
-class MongooseDriver implements Client {
-    /**
-     * The Mongoose config.
-     *
-     * @var {Config}
-     */
-    private config: Config;
-
-    /**
-     * Create a new Mongoose driver instance.
-     *
-     * @constructor
-     */
-    public constructor() {
-        this.config = MONGO;
-    }
-
+class MongooseDriver extends MongoClient implements Client {
     /**
      * Establish a database connection.
      *
-     * @return {void}
+     * @return {Promise<void>}
      */
     async connect(): Promise<void> {
         try {
@@ -55,21 +38,10 @@ class MongooseDriver implements Client {
     /**
      * Close a database connection.
      *
-     * @return {void}
+     * @return {Promise<void>}
      */
     disconnect(): Promise<void> {
         return mongoose.disconnect();
-    }
-
-    /**
-     * Generate the full connection URL.
-     *
-     * @return {string}
-     */
-    private url(): string {
-        const { USERNAME, PASSWORD, HOST, PORT, DATABASE } = this.config;
-
-        return `mongodb://${USERNAME}:${PASSWORD}@${HOST}:${PORT}/${DATABASE}`;
     }
 }
 

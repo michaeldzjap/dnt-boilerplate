@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { validationResult } from 'express-validator';
 
-import { html } from '../lib/controllers/validate';
+// import { html } from '../lib/controllers/validate';
+import { expectsJson } from '../lib/http/helpers';
 
 /**
  * Show the user registration page.
@@ -22,8 +22,9 @@ export const index = (request: Request, response: Response): void => {
  * @returns {void}
  */
 export const store = (request: Request, response: Response): void => {
-    html(request, response, 'auth/register');
+    // html(request, response);
 
-    console.log(request.body);
-    response.send();
+    console.log(expectsJson(request));
+    // console.log(request.body);
+    response.json('Hey now!');
 };

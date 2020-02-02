@@ -1,15 +1,12 @@
 import { Server } from 'http';
-import express, { Express, Request, Response } from 'express';
-import morgan from 'morgan';
+import express, { Express } from 'express';
 
-import api from '../routes/api';
 import ApplicationContract from '../types/lib/Application';
 import DatabaseManager from '../lib/database/DatabaseManager';
+import MiddlewareRegistrar from '../middleware/MiddlewareRegistrar';
 import TemplatingManager from '../lib/templating/TemplatingManager';
-import web from '../routes/web';
-import { isUndefined, environment } from '../lib/support/helpers';
+import { isUndefined } from '../lib/support/helpers';
 import { HTTP_HOSTNAME, HTTP_PORT } from '../config/app';
-import { HTTP_NOT_FOUND, HTTP_INTERNAL_SERVER_ERROR } from '../constants/http';
 
 /**
  * @class
@@ -45,6 +42,13 @@ class Application implements ApplicationContract {
     private templating: TemplatingManager;
 
     /**
+     * The middleware registrar instance.
+     *
+     * @var {MiddlewareRegistrar}
+     */
+    private registrar: MiddlewareRegistrar;
+
+    /**
      * Create a new application instance
      *
      * @constructor
@@ -54,6 +58,7 @@ class Application implements ApplicationContract {
 
         this.database = new DatabaseManager(this.application);
         this.templating = new TemplatingManager(this.application);
+        this.registrar = new MiddlewareRegistrar(this.application);
     }
 
     /**
@@ -86,61 +91,14 @@ class Application implements ApplicationContract {
 
         /*
         |------------------------------------------------------------------------------
-        | Logging
+        | Middleware
         |------------------------------------------------------------------------------
         |
-        | Enable request logging when in development mode.
+        | Register all app specific middleware with the application.
         |
         */
 
-        if (environment('development')) {
-            this.application.use(morgan('dev'));
-        }
-
-        /*
-        |------------------------------------------------------------------------------
-        | Static Assets
-        |------------------------------------------------------------------------------
-        |
-        | Server all static assets in the public folder.
-        |
-        */
-
-        this.application.use(express.static('public'));
-
-        /*
-        |------------------------------------------------------------------------------
-        | Routes
-        |------------------------------------------------------------------------------
-        |
-        | Register all routers and routes with the application.
-        |
-        */
-
-        [
-            { prefix: '/', routes: web },
-            { prefix: '/api', routes: api },
-        ].forEach(({ prefix, routes }): void => {
-            const router = express.Router();
-
-            routes(router);
-
-            this.application.use(prefix, router);
-        });
-
-        this.application.use((request: Request, response: Response): void => {
-            response.type('text/plain');
-            response.status(HTTP_NOT_FOUND);
-            response.send('Not Found');
-        });
-
-        this.application.use((error: Error, request: Request, response: Response, next: Function): void => {
-            console.error(error.stack);
-
-            response.type('text/plain');
-            response.status(HTTP_INTERNAL_SERVER_ERROR);
-            response.send('Internal Server Error');
-        });
+        this.registrar.register();
 
         /*
         |------------------------------------------------------------------------------
