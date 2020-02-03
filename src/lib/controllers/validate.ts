@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { validationResult, ValidationError } from 'express-validator';
 import { cloneDeep } from 'lodash';
 
+import ValidationErrors from '../../types/lib/validation/ValidationErrors';
 import { isUndefined } from '../support/helpers';
 import { expectsJson, back } from '../http/helpers';
 import { HTTP_UNPROCESSABLE_ENTITY } from '../../constants/http';
@@ -66,9 +67,9 @@ export const validate = (request: Request, response: Response): void => {
  * Pull any validation errors out of the session if there are any.
  *
  * @param {Request} request
- * @returns {(ValidationError[]|undefined)}
+ * @returns {(ValidationErrors|undefined)}
  */
-export const pullErrors = (request: Request): ValidationError[] | undefined => {
+export const pullErrors = (request: Request): ValidationErrors | undefined => {
     const session = request.session;
 
     if (isUndefined(session) || isUndefined(session.errors)) return;
@@ -78,7 +79,7 @@ export const pullErrors = (request: Request): ValidationError[] | undefined => {
     delete session.errors;
 
     // Index the errors by parameter name, makes it easier to handle them in the view
-    return errors.reduce((acc: any, error: ValidationError): any => {
+    return errors.reduce((acc: ValidationErrors, error: ValidationError): ValidationErrors => {
         acc[error.param] = {
             message: error.msg,
             value: error.value,
