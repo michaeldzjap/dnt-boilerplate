@@ -13,15 +13,31 @@
                     <div class="field">
                         <label class="label">Name</label>
                         <div class="control">
-                            <input class="input" name="name" type="text">
+                            <input class="input {% if errors.name %}is-danger{% endif %}" name="name" type="text" autocomplete="name">
                         </div>
+                        {% if errors.name %}
+                            <p class="help is-danger">{{ errors.name.message }}</p>
+                        {% endif %}
                     </div>
 
                     <div class="field">
                         <label class="label">Email</label>
                         <div class="control">
-                            <input class="input" name="email" type="email">
+                            <input class="input {% if errors.email %}is-danger{% endif %}" name="email" type="email" autocomplete="email">
                         </div>
+                        {% if errors.email %}
+                            <p class="help is-danger">{{ errors.email.message }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Password</label>
+                        <div class="control">
+                            <input class="input {% if errors.password %}is-danger{% endif %}" name="password" type="password" autocomplete="new-password">
+                        </div>
+                        {% if errors.password %}
+                            <p class="help is-danger">{{ errors.password.message }}</p>
+                        {% endif %}
                     </div>
 
                     <div class="field">

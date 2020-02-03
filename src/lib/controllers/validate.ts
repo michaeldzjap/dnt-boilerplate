@@ -1,7 +1,9 @@
 import { Request, Response } from 'express';
-import { validationResult } from 'express-validator';
+import { validationResult, ValidationError } from 'express-validator';
+import { cloneDeep } from 'lodash';
 
-import { expectsJson } from '../http/helpers';
+import { isUndefined } from '../support/helpers';
+import { expectsJson, back } from '../http/helpers';
 import { HTTP_UNPROCESSABLE_ENTITY } from '../../constants/http';
 
 /**
@@ -17,8 +19,14 @@ const html = (request: Request, response: Response): void => {
 
     if (!errors.isEmpty()) {
         response.status(HTTP_UNPROCESSABLE_ENTITY);
-        // response.redirect(request.path);
-        // response.render(view, { errors: errors.array() });
+
+        const session = request.session;
+
+        if (!isUndefined(session)) {
+            session.errors = errors.array();
+        }
+
+        back(request, response);
     }
 };
 
@@ -52,4 +60,30 @@ export const validate = (request: Request, response: Response): void => {
     } else {
         html(request, response);
     }
+};
+
+/**
+ * Pull any validation errors out of the session if there are any.
+ *
+ * @param {Request} request
+ * @returns {(ValidationError[]|undefined)}
+ */
+export const pullErrors = (request: Request): ValidationError[] | undefined => {
+    const session = request.session;
+
+    if (isUndefined(session) || isUndefined(session.errors)) return;
+
+    const errors = cloneDeep<ValidationError[]>(session.errors);
+
+    delete session.errors;
+
+    // Index the errors by parameter name, makes it easier to handle them in the view
+    return errors.reduce((acc: any, error: ValidationError): any => {
+        acc[error.param] = {
+            message: error.msg,
+            value: error.value,
+        };
+
+        return acc;
+    }, {});
 };

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
-// import { html } from '../lib/controllers/validate';
-import { expectsJson } from '../lib/http/helpers';
+import newUser from '../rules/newUser';
+import { validate, pullErrors } from '../lib/controllers/validate';
 
 /**
  * Show the user registration page.
@@ -11,7 +11,7 @@ import { expectsJson } from '../lib/http/helpers';
  * @returns {void}
  */
 export const index = (request: Request, response: Response): void => {
-    response.render('auth/register');
+    response.render('auth/register', { errors: pullErrors(request) });
 };
 
 /**
@@ -21,10 +21,13 @@ export const index = (request: Request, response: Response): void => {
  * @param {Response} response
  * @returns {void}
  */
-export const store = (request: Request, response: Response): void => {
-    // html(request, response);
+export const store = [
+    newUser,
+    (request: Request, response: Response): void => {
+        validate(request, response);
 
-    console.log(expectsJson(request));
-    // console.log(request.body);
-    response.json('Hey now!');
-};
+        // console.log(request.body);
+
+        // response.send('User registered');
+    },
+];
