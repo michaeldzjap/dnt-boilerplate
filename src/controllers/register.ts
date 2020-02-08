@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import newUser from '../rules/newUser';
-import { validate, pullErrors } from '../lib/controllers/validate';
+import { validate, pullErrors } from '../lib/http/middleware/validateInput';
 
 /**
  * Show the user registration page.
@@ -23,11 +23,10 @@ export const index = (request: Request, response: Response): void => {
  */
 export const store = [
     newUser,
+    validate,
     (request: Request, response: Response): void => {
-        validate(request, response);
+        console.log(request.body);
 
-        // console.log(request.body);
-
-        // response.send('User registered');
+        response.send('User registered');
     },
 ];

@@ -4,6 +4,10 @@ export const HTTP_CREATED = 201;
 export const HTTP_ACCEPTED = 202;
 export const HTTP_NO_CONTENT = 204;
 
+// Redirection
+export const HTTP_MOVED_PERMANENTLY = 301;
+export const HTTP_FOUND = 302;
+
 // Client errors
 export const HTTP_BAD_REQUEST = 400;
 export const HTTP_UNAUTHORIZED = 401;

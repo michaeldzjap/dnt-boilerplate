@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import { isUndefined } from '../support/helpers';
+import { HTTP_FOUND } from '../../constants/http';
 
 /**
  * Determine if the request is the result of an AJAX call.
@@ -87,10 +88,11 @@ export const previousUrl = (request: Request): string | undefined => {
  * Redirect back to the previous location.
  *
  * @param {Request} request
- * @param {number} [status=302]
+ * @param {Response} response
+ * @param {number} [status=HTTP_FOUND]
  * @returns {void}
  */
-export const back = (request: Request, response: Response, status = 302): void => {
+export const back = (request: Request, response: Response, status = HTTP_FOUND): void => {
     const referrer = request.header('Referer');
 
     const url = referrer || previousUrl(request);
