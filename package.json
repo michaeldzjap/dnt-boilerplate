@@ -87,7 +87,7 @@
     "lodash": "^4.17.15",
     "mongoose": "^5.8.11",
     "nunjucks": "^3.2.0",
-    "validator": "^12.2.0"
+    "validator": "^13.7.0"
   },
   "husky": {
     "hooks": {
