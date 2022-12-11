@@ -81,7 +81,7 @@
     "bulma": "^0.8.0",
     "connect-mongodb-session": "^2.3.0",
     "consolidate": "^0.15.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-session": "^1.17.0",
     "express-validator": "^6.4.0",
     "lodash": "^4.17.15",
